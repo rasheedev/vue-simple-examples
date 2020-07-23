@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Vue.js Get Github Repositories With Axios</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap'>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Open Sans", sans-serif;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="app">
+        <input type="text" v-model="username" placeholder="Type Github Username" />
+        <button @click="getRepos">Get Repos</button>
+        <div v-for="repo in repos">
+            <h4>{{ repo.name }}</h4>
+            <p>{{ repo.description }}</p>
+        </div>
+    </div>
+
+    <script src='vue.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js'></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                username: null,
+                repos: null 
+            },
+            methods: {
+                getRepos: function () {
+                    /************************
+                    [1] Get Data From API
+                    [2] Return The Response
+                    [3] Catch Error
+                    ************************/
+                    return axios.
+                        get(`https://api.github.com/users/${this.username}/repos`).
+                        then(response => {
+                            this.repos = response.data;
+                        }).
+                        catch(error => {
+                            console.log(error);
+                        });
+                } 
+            } 
+        });
+    </script>
+</body>
+</html>

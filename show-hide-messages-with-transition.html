@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CodePen - Vue.js Show Hide Message With Transition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap'>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Open Sans", sans-serif;
+            font-size: 18px;
+        }
+        .container {
+            margin: 20px auto;
+            width: 1200px;
+            text-align: center;
+        }
+        .container .the-message {
+            padding: 20px;
+            background-color: #eee;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        .bounce-enter-active {
+            -webkit-animation: bounce-in 0.5s;
+                    animation: bounce-in 0.5s;
+        }
+        .bounce-leave-active {
+            animation: bounce-in 0.5s reverse;
+        }
+        @-webkit-keyframes bounce-in {
+            0% {
+                -webkit-transform: scale(0);
+                        transform: scale(0);
+            }
+            50% {
+                -webkit-transform: scale(1.5);
+                        transform: scale(1.5);
+            }
+            100% {
+                -webkit-transform: scale(1);
+                        transform: scale(1);
+            }
+        }
+        @keyframes bounce-in {
+            0% {
+                -webkit-transform: scale(0);
+                        transform: scale(0);
+            }
+            50% {
+                -webkit-transform: scale(1.5);
+                        transform: scale(1.5);
+            }
+            100% {
+                -webkit-transform: scale(1);
+                        transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="app">
+        <button @click="message = !message">{{ message ? "Hide Message" : "Show Message" }}</button>
+        <transition name="bounce">
+            <div class="the-message" v-if="message">This Is An Alert!</div>
+        </transition>
+    </div>
+
+    <script src='vue.min.js'></script>
+    <script >
+        new Vue({
+            el: "#app",
+            data: {
+                message: false 
+            } 
+        });
+    </script>
+
+</body>
+</html>

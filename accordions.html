@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Accordions</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap'>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Open Sans", sans-serif;
+            font-size: 18px;
+            padding-bottom: 100px;
+        }
+
+        .container {
+            margin: 20px auto;
+            width: 600px;
+        }
+        .container .question-box:not(:last-child) {
+            border-bottom: 1px solid #EEE;
+        }
+        .container .question-box h3 {
+            margin: 0;
+            padding: 15px;
+            background-color: #DFDFDF;
+        }
+        .container .question-box h3:hover {
+            cursor: pointer;
+        }
+        .container .question-box .question-reply {
+            background-color: #EFEFEF;
+            padding: 15px;
+        }
+        .container .question-box .question-reply p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="app">
+        <div class="question-box" v-for="question in questions">
+            <h3 @click="question.open = !question.open" v-text="question.title"></h3>
+            <div class="question-reply" v-show="question.open">
+                <p v-text="question.reply"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src='vue.min.js'></script>
+    <script>
+        var questions = {
+            "Question One": {
+                "open": false,
+                "title": "One: What Happen When Bla Bla Bla?",
+                "reply": "You Can Do What You Want Bla Bla Bla." 
+            },
+
+            "Question Two": {
+                "open": false,
+                "title": "Two: What Happen When Bla Bla Bla?",
+                "reply": "You Can Do What You Want Bla Bla Bla." 
+            },
+
+            "Question Three": {
+                "open": false,
+                "title": "Three: What Happen When Bla Bla Bla?",
+                "reply": "You Can Do What You Want Bla Bla Bla." 
+            },
+
+            "Question Four": {
+                "open": false,
+                "title": "Four: What Happen When Bla Bla Bla?",
+                "reply": "You Can Do What You Want Bla Bla Bla." 
+            },
+
+            "Question Five": {
+                "open": false,
+                "title": "Five: What Happen When Bla Bla Bla?",
+                "reply": "You Can Do What You Want Bla Bla Bla." 
+            } 
+        };
+        new Vue({
+            el: "#app",
+            data: {
+                questions: questions 
+            } 
+        });
+    </script>
+    
+</body>
+</html>

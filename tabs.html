@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Tabs</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap'>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Open Sans", sans-serif;
+            font-size: 18px;
+        }
+        .container {
+            margin: 20px auto;
+            width: 1200px;
+        }
+        .container .tabs-choose {
+            margin-bottom: 0;
+        }
+        .container .tabs-choose li {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #eee;
+            cursor: pointer;
+            opacity: 0.3;
+        }
+        .container .tabs-choose li.active {
+            opacity: 1;
+        }
+        .container .tabs-content {
+            background-color: #eee;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="app">
+        <ul class="tabs-choose">
+            <li @click="activeTab = '1'" :class="[activeTab === '1' ? 'active' : '']">Tab One</li>
+            <li @click="activeTab = '2'" :class="[activeTab === '2' ? 'active' : '']">Tab One</li>
+            <li @click="activeTab = '3'" :class="[activeTab === '3' ? 'active' : '']">Tab One</li>
+            <li @click="activeTab = '4'" :class="[activeTab === '4' ? 'active' : '']">Tab One</li>
+        </ul>
+        <div class="tabs-content">
+            <div class="content-one" v-if="activeTab === '1'">Content One</div>
+            <div class="content-two" v-if="activeTab === '2'">Content Two</div>
+            <div class="content-three" v-if="activeTab === '3'">Content Three</div>
+            <div class="content-four" v-if="activeTab === '4'">Content Four</div>
+        </div>
+    </div>
+
+
+    <script src='vue.min.js'></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                activeTab: "1" 
+            }
+        });
+    </script>
+
+</body>
+</html>

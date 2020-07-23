@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validate Button Depend On Field</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap'>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Open Sans", sans-serif;
+            font-size: 18px;
+        }
+        .container {
+            text-align: center;
+        }
+        .container form {
+            margin: 20px auto;
+            width: 400px;
+        }
+        .container form input {
+            width: 100%;
+            margin-bottom: 15px;
+            height: 46px;
+            padding: 10px;
+        }
+        .container form button {
+            width: 100%;
+            display: block;
+            padding: 15px 10px;
+            background-color: #2196f3;
+            color: #fff;
+            border-color: transparent;
+            cursor: pointer;
+        }
+        .container form button:disabled {
+            opacity: 0.4;
+            cursor: no-drop;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="app">
+        <form>
+            <input type="text" placeholder="Type Your Name" v-model="name" />
+            <input type="text" placeholder="Type Your Email" v-model="email" />
+            <input type="text" placeholder="Type Your Phone" v-model="phone" />
+            <button :disabled="!name || !email || !phone">Send Data</button>
+        </form>
+    </div>
+
+    <script src='vue.min.js'></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                name: null,
+                email: null,
+                phone: null 
+            } 
+        });
+    </script>
+
+</body>
+</html>

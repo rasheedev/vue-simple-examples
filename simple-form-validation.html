@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap'>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Open Sans", sans-serif;
+            font-size: 18px;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+        .container form {
+            width: 500px;
+            margin: 20px auto;
+        }
+        .container form .errors-list .error {
+            padding: 15px;
+            background-color: rgba(244, 67, 54, 0.14);
+            color: #f44336;
+            margin-bottom: 15px;
+        }
+        .container form .form-group {
+            margin-bottom: 20px;
+        }
+        .container form label {
+            display: block;
+            margin-bottom: 15px;
+        }
+        .container form .form-input {
+            padding: 10px 15px;
+            background-color: #efefef;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+        .container form textarea {
+            height: 120px;
+            resize: none;
+        }
+        .container form .send-button {
+            display: block;
+            background-color: #2196f3;
+            color: #fff;
+            border-color: transparent;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="app">
+        <form action="send.html" method="post" @submit="validateForm">
+            <div class="errors-list">
+                <div class="error" v-for="error in formErrors">{{ error }}</div>
+            </div>
+            <div class="form-group">
+                <label for="">Username</label>
+            <input class="form-input" type="text" name="username" v-model="username" />
+            </div>
+            <div class="form-group">
+                <label for="">Subject</label>
+                <input class="form-input" type="text" name="subject" v-model="subject" />
+            </div>
+            <div class="form-group">
+                <label for="">Message</label>
+                <textarea class="form-input" name="message" v-model="message"></textarea>
+            </div>
+            <div class="form-group">
+                <input class="send-button" type="submit" value="Send" />
+            </div>
+        </form>
+    </div>
+
+    <script src='vue.min.js'></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                formErrors: [],
+                username: null,
+                subject: null,
+                message: null,
+                maxChars: 10 
+            },
+            methods: {
+                validateForm: function (e) {
+                    this.formErrors = []; // Empty Errors To Start Fresh
+                    // [1] Check If Username Is Empty
+                    if (!this.username) {
+                        this.formErrors.push("Username Cant Be Empty");
+                    }
+                    // [2] Check If Subject Is Empty
+                    if (!this.subject) {
+                        this.formErrors.push("Subject Cant Be Empty");
+                    }
+                    // [3] Check If Message Is Empty
+                    if (!this.message) {
+                        this.formErrors.push("Message Cant Be Empty");
+                    }
+                    // [4] Check Username Characters Count
+                    if (this.username && this.username.length > this.maxChars) {
+                        this.formErrors.push(
+                        `Username Cant Be More Than ${this.maxChars} Characters`);
+                    }
+                    // If No Errors Return True
+                    if (!this.formErrors.length) {
+                        return true;
+                    }
+                    e.preventDefault();
+                }
+            } 
+        });
+    </script>
+</body>
+</html>

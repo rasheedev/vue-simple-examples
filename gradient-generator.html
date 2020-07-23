@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap'>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Open Sans", sans-serif;
+            font-size: 18px;
+        }
+        .container {
+            text-align: center;
+        }
+        .container .grad-box {
+            padding: 40px;
+            border-bottom: 1px solid #ccc;
+            color: #fff;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .container form {
+            margin: 20px auto;
+            width: 900px;
+        }
+        .container form .form-group {
+            display: inline-block;
+        }
+        .container form .form-group label {
+            display: block;
+            margin-bottom: 15px;
+        }
+        .container form .form-group input {
+            padding: 10px 15px;
+            background-color: #efefef;
+            border: 1px solid #ccc;
+        }
+        .container form .separator {
+            margin: 0 20px;
+        }
+        .container .result,
+        .container .syntax {
+            margin: 20px auto;
+            background-color: rgba(3, 169, 244, 0.35);
+            padding: 20px;
+            width: 865px;
+            text-align: left;
+        }
+        .container .result span,
+        .container .syntax span {
+            font-weight: bold;
+            width: 120px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="elzero-app">
+        <div class="grad-box" :style="{ backgroundImage: 'linear-gradient('+ direction +' , '+ colorOne +' , '+ colorTwo +')' }">Gradient Preview</div>
+        <form>
+            <div class="form-group">
+                <label>Direction</label>
+                <input type="text" v-model="direction" />
+            </div>
+            <span class="separator">|</span>
+
+            <div class="form-group">
+                <label>Color Stop One</label>
+                <input type="text" v-model="colorOne" />
+            </div>
+            <span class="separator">|</span>
+            
+            <div class="form-group">
+                <label>Color Stop Two</label>
+                <input type="text" v-model="colorTwo" />
+            </div>
+        </form>
+        <div class="result"><span>Css Code:</span>background-image: linear-gradient({{ direction }}, {{ colorOne }}, {{ colorTwo }});</div>
+        <div class="syntax"><span>Syntax:</span>background-image: linear-gradient(direction, color-stop1, color-stop2, ...);</div>
+    </div>
+
+    <script src='vue.min.js'></script>
+    <script>
+        new Vue({
+            el: "#elzero-app",
+            data: {
+                direction: "to right",
+                colorOne: "#FF0000",
+                colorTwo: "#FFFF00" 
+            } 
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap'>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .container {
+            text-align: center;
+        }
+        .container form {
+            margin: 20px auto 10px;
+            width: 500px;
+            overflow: hidden;
+        }
+        .container form input {
+            background-color: #f7f7f7;
+            border: 1px solid #eee;
+            margin-bottom: 15px;
+            width: calc(100% - 210px);
+            height: 46px;
+            padding: 10px;
+            float: left;
+        }
+        .container form input:focus {
+            outline: none;
+        }
+        .container form button {
+            width: 90px;
+            height: 46px;
+            padding: 10px;
+            background-color: #2196f3;
+            color: #fff;
+            border-color: transparent;
+            cursor: pointer;
+            float: left;
+            margin-left: 5px;
+        }
+        .container form button:disabled {
+            opacity: 0.4;
+            cursor: no-drop;
+        }
+        .container form button:focus {
+            outline: none;
+        }
+        .container form button.delete-all {
+            width: 110px;
+            background-color: #f44336;
+        }
+        .container .tasks-list {
+            width: 500px;
+            margin: 0 auto;
+        }
+        .container .tasks-list .task-box {
+            background-color: rgba(139, 195, 74, 0.25);
+            padding: 15px;
+            text-align: left;
+            margin-bottom: 15px;
+            margin-right: 5px;
+            width: calc(100% - 86px);
+            cursor: pointer;
+            float: left;
+        }
+        .container .tasks-list .delete {
+            float: right;
+            width: 80px;
+            background-color: #f44336;
+            color: #fff;
+            border-color: transparent;
+            padding: 1px 10px;
+            cursor: pointer;
+            height: 48px;
+            line-height: 51px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="app">
+        <form>
+            <input type="text" placeholder="Type Your Task" v-model="taskText" />
+            <button @click.prevent="addTask" :disabled="!taskText">Add Task</button>
+            <button class="delete-all" v-if="tasks.length > 1" @click.prevent="deleteAll">Delete All</button>
+        </form>
+        <div class="tasks-list" v-for="(task, index) in tasks">
+            <div class="task-box" @click="task.done = !task.done" :style="{ 'text-decoration': task.done ? 'line-through' : '' }">{{ task.words }}</div>
+            <div class="delete" @click="deleteTask(index)">Delete</div>
+        </div>
+    </div>
+
+    <script src='vue.min.js'></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                tasks: [],
+                taskText: "" 
+            },
+            methods: {
+                addTask: function () {
+                    this.tasks.push({ words: this.taskText, done: false });
+                    this.taskText = "";
+                },
+                deleteTask: function (index) {
+                    this.tasks.splice(index, 1);
+                },
+                deleteAll: function () {
+                    this.tasks = [];
+                } 
+            } 
+        });
+    </script>
+
+</body>
+</html>

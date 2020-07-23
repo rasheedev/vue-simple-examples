@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title to Slug</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap'>
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+        
+        body {
+          font-family: "Open Sans", sans-serif;
+          font-size: 18px;
+        }
+        
+        .container .input-container {
+          margin: 20px auto;
+        }
+        .container .input-container input {
+          padding: 15px;
+          border: 1px solid #CCC;
+          height: 40px;
+        }
+        .container .input-container button {
+          height: 40px;
+          cursor: pointer;
+        }
+        .container .slug-result {
+          background-color: #EEE;
+          padding: 15px;
+          width: 500px;
+          text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="app">
+        <div class="input-container">
+            <input v-model="input" type="text" placeholder="Post Title" />
+            <button @click="convertToSlug">Convert To Slug</button>
+        </div>
+        <div class="slug-result">http://elzero.org/<span>{{ output }}</span></div>
+    </div>
+
+    <script src='vue.min.js'></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                input: '',
+                output: '' 
+            },
+            methods: {
+                convertToSlug: function () {
+                    // Caching The Variable
+                    var theSlug = this.input;
+                    // Convert To LowerCase
+                    theSlug = theSlug.toLowerCase();
+                    // Replace Whitespace With Dash "-"
+                    theSlug = theSlug.replace(/\s+/g, '-');
+                    // Replace Ampersand With Dash and Spaces
+                    theSlug = theSlug.replace(/&/g, "-and-");
+                    this.output = theSlug;
+                } 
+            } 
+        });
+    </script>
+
+</body>
+</html>

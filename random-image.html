@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Random Image From Images</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap'>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Open Sans", sans-serif;
+            font-size: 18px;
+        }
+        .container {
+            margin: 20px auto;
+            width: 1200px;
+            text-align: center;
+        }
+        .links-urls {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 10px;
+        }
+        .links-urls .link {
+            padding: 10px 20px;
+            display: block;
+            background-color: #EEE;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="app">
+        <img v-if="selected" :src="selected" alt="" />
+    </div>
+
+    <script src='vue.min.js'></script>
+    <script>
+        var photos = [
+            "http://placehold.it/400/F00/FFF", // Index 0
+            "http://placehold.it/400/00F/FFF", // Index 1
+            "http://placehold.it/400/080/FFF",
+            "http://placehold.it/400/000/FFF",
+            "http://placehold.it/400/AAA/FFF"
+        ];
+        new Vue({
+            el: "#app",
+            data: {
+                photos: photos,
+                selected: null 
+            },
+            methods: {
+                randomPhoto(imgs) {
+                    return imgs[Math.floor(Math.random() * imgs.length)];
+                } 
+            },
+            created() {
+                this.selected = this.randomPhoto(this.photos);
+            } 
+        });
+    </script>
+
+</body>
+</html>
